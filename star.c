@@ -122,7 +122,7 @@ int main (int argc, char *argv[])
 	while (1) {
 		olLoadIdentity3();
 		olLoadIdentity();
-		olPerspective(60, 1, 1, 100);
+		olPerspective(65, 1, 1, 100);
 		olTranslate3(0, 0, -3);
 
 		hue = (hue + 1) % 255;
@@ -132,20 +132,26 @@ int main (int argc, char *argv[])
 
 		int color = (b) + (g << 8) + (r << 16);
 
+		olScale3(0.9, 0.9, 0.9);
 
-		for (i = 0; i < 20; i++) {
 
-			olScale3(0.95, 0.95, 0.95);
+		for (i = 1; i <= 17; i++) {
 
-			olRotate3Z(time / 10);
-			
-			// olRotate3Y(time * M_PI * 0.8 * 0.1);
-			// olRotate3X(time * M_PI * 7.3 * 0.1);
+			olScale3(0.9, 0.9, 0.9);
+
+			olRotate3Z(time / 3);
+			olRotate3Y(time / 10);
+			olRotate3X(time / 15);
 
 			olBegin(OL_POINTS);
 
 			for (y = 0; y < 30; y++) {
 				olVertex3(-1, -1, -1, color);
+
+				// olRotate3Z(0.01);
+				// olRotate3Y(0.02);
+				// olRotate3X(0.03);
+
 			}
 
 			olEnd();
@@ -153,7 +159,7 @@ int main (int argc, char *argv[])
 
 		}
 
-		ftime = olRenderFrame(200);
+		ftime = olRenderFrame(40);
 		frames++;
 		time += ftime;
 		printf("Frame time: %f, FPS:%f\n", ftime, frames / time);
