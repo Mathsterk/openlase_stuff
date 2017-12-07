@@ -23,4 +23,8 @@ link_directories (${CMAKE_BINARY_DIR}/libol)
 
 add_executable(pendulum pendulum.c)
 target_link_libraries(pendulum ol)
-target_link_libraries(pendulum ${JACK_LIBRARIES} m)
+# target_link_libraries(pendulum ${JACK_LIBRARIES} m)
+
+add_executable(starfield starfield.c)
+target_link_libraries(starfield ol)
+target_link_libraries(starfield ${JACK_LIBRARIES} m)
