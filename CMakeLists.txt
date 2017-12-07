@@ -21,6 +21,6 @@ include_directories (/usr/include)
 
 link_directories (${CMAKE_BINARY_DIR}/libol)
 
-add_executable(star star.c)
-target_link_libraries(star ol)
-target_link_libraries(star ${JACK_LIBRARIES} m)
+add_executable(pendulum pendulum.c)
+target_link_libraries(pendulum ol)
+target_link_libraries(pendulum ${JACK_LIBRARIES} m)
