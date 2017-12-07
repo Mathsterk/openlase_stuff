@@ -136,19 +136,20 @@ int main (int argc, char *argv[])
 
 
 
-		for (i = 1; i <= 17; i++) {
+		for (i = 0; i < 9; i++) {
+			for (int x = 0; x < 9; x++) {
 
-			
-			olBegin(OL_POINTS);
+				olBegin(OL_POINTS);
+				for (y = 0; y < 30; y++) {
+					olVertex3( 1 - i / 5, 1 - x / 5, -1, color);
 
-			for (y = 0; y < 30; y++) {
-				olVertex3(-1, -1, -1, color);
+					// olRotate3Z(0.01);
+					// olRotate3Y(0.02);
+					// olRotate3X(0.03);
 
-				// olRotate3Z(0.01);
-				// olRotate3Y(0.02);
-				// olRotate3X(0.03);
-
+				}
 			}
+
 
 			olEnd();
 
