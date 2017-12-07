@@ -135,6 +135,7 @@ int main (int argc, char *argv[])
 		olScale3(0.9, 0.9, 0.9);
 
 
+
 		for (i = 1; i <= 17; i++) {
 
 			olScale3(0.9, 0.9, 0.9);
