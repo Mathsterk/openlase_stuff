@@ -138,7 +138,7 @@ int main (int argc, char *argv[])
 	while (1) {
 		olLoadIdentity3();
 		olLoadIdentity();
-		olPerspective(65, 1, 1, 100);
+		olPerspective(60, 1, 1, 100);
 		olTranslate3(0, 0, -3);
 
 		hue = (hue + 1) % 255;
@@ -156,20 +156,15 @@ int main (int argc, char *argv[])
 
 		for (i = 0; i < numberOfStars; i++) {
 
-			if (stars[i][0] > 1 || stars[i][0] < -1) {
+			if (stars[i][0] > 1 || stars[i][0] < -1 || stars[i][1] > 1 || stars[i][1] < -1 || stars[i][2] > 1 || stars[i][2] < -1) {
 				stars[i][0] = 0.0f;
-				stars[i][3] = (((double)rand() / RAND_MAX) / 100) - 0.005f;
-			}
-
-			if (stars[i][1] > 1 || stars[i][1] < -1) {
 				stars[i][1] = 0.0f;
-				stars[i][4] = (((double)rand() / RAND_MAX) / 100) - 0.005f;
-			}
-
-			if (stars[i][2] > 1 || stars[i][2] < -1) {
 				stars[i][2] = 0.0f;
+				stars[i][3] = (((double)rand() / RAND_MAX) / 100) - 0.005f;
+				stars[i][4] = (((double)rand() / RAND_MAX) / 100) - 0.005f;
 				stars[i][5] = (((double)rand() / RAND_MAX) / 100) - 0.005f;
 			}
+
 
 			stars[i][0] = stars[i][0] + stars[i][3];
 			stars[i][1] = stars[i][1] + stars[i][4];
