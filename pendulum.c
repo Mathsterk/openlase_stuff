@@ -146,7 +146,7 @@ int main (int argc, char *argv[])
 
 			olBegin(OL_POINTS);
 
-			for (y = 0; y < 30; y++) {
+			for (y = 0; y < 35; y++) {
 				olVertex3(-1, -1, -1, color);
 
 				// olRotate3Z(0.01);

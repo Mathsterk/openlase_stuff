@@ -94,13 +94,13 @@ int main (int argc, char *argv[])
 	params.rate = 48000;
 	params.on_speed = 2.0 / 10.0;
 	params.off_speed = 2.0 / 10.0;
-	params.start_wait = 30;
-	params.start_dwell = 5;
-	params.curve_dwell = 2;
+	params.start_wait = 25;
+	params.start_dwell = 2;
+	params.curve_dwell = 4;
 	params.corner_dwell = 8;
 	params.curve_angle = cosf(30.0 * (M_PI / 180.0)); // 30 deg
-	params.end_dwell = 5;
-	params.end_wait = 10;
+	params.end_dwell = 2;
+	params.end_wait = 5;
 	params.snap = 1 / 100000.0;
 	params.render_flags = RENDER_GRAYSCALE;
 
@@ -112,7 +112,22 @@ int main (int argc, char *argv[])
 	float time = 0;
 	float ftime;
 	int i;
-	float y = 0.0f, x = 0.0f;
+	int a;
+	// float y = 0.0f;
+	// float x = 0.0f;
+	// int xI = 0;
+	// int yI = 0;
+	int numberOfStars = 30;
+	float stars[numberOfStars][5];
+
+	for (i = 0; i < numberOfStars; i++) {
+		stars[i][0] = (((double)rand() / RAND_MAX) * 2) - 1;
+		stars[i][1] = (((double)rand() / RAND_MAX) * 2) - 1;
+		stars[i][2] = (((double)rand() / RAND_MAX) * 2) - 1;
+		stars[i][3] = (((double)rand() / RAND_MAX) / 100) - 0.005f;
+		stars[i][4] = (((double)rand() / RAND_MAX) / 100) - 0.005f;
+		stars[i][5] = (((double)rand() / RAND_MAX) / 100) - 0.005f;
+	}
 
 	int frames = 0;
 
@@ -123,8 +138,8 @@ int main (int argc, char *argv[])
 	while (1) {
 		olLoadIdentity3();
 		olLoadIdentity();
-		olPerspective(60, 1, 1, 100);
-		olTranslate3(0, 0, 0);
+		olPerspective(65, 1, 1, 100);
+		olTranslate3(0, 0, -3);
 
 		hue = (hue + 1) % 255;
 
@@ -135,28 +150,46 @@ int main (int argc, char *argv[])
 
 		olScale3(0.9, 0.9, 0.9);
 
+		olRotate3X(time * 0.1862);
+		olRotate3Y(time * 0.1244);
+		olRotate3Z(time * 0.1731);
 
-		for (y = 0; y < 10; y++) {
-			for (x = 0; x < 10; x++) {
+		for (i = 0; i < numberOfStars; i++) {
 
-				olBegin(OL_POINTS);
-				for (i = 0; i < 2; i++) {
-					olVertex3(y / 10 - 1, x / 10 - 1, -1, color);
-
-					// olRotate3Z(0.01);
-					// olRotate3Y(0.02);
-					// olRotate3X(0.03);
-
-				}
-
-				olEnd();
+			if (stars[i][0] > 1 || stars[i][0] < -1) {
+				stars[i][0] = 0.0f;
+				stars[i][3] = (((double)rand() / RAND_MAX) / 100) - 0.005f;
 			}
+
+			if (stars[i][1] > 1 || stars[i][1] < -1) {
+				stars[i][1] = 0.0f;
+				stars[i][4] = (((double)rand() / RAND_MAX) / 100) - 0.005f;
+			}
+
+			if (stars[i][2] > 1 || stars[i][2] < -1) {
+				stars[i][2] = 0.0f;
+				stars[i][5] = (((double)rand() / RAND_MAX) / 100) - 0.005f;
+			}
+
+			stars[i][0] = stars[i][0] + stars[i][3];
+			stars[i][1] = stars[i][1] + stars[i][4];
+			stars[i][2] = stars[i][2] + stars[i][5];
+
+			olBegin(OL_POINTS);
+
+
+			for (a = 0; a < 15; a++) {
+				olVertex3(stars[i][0], stars[i][1], stars[i][2], color);
+			}
+
+			olEnd();
+
 		}
 
-		ftime = olRenderFrame(60);
+		ftime = olRenderFrame(120);
 		frames++;
 		time += ftime;
-		printf("Frame time: %d, FPS:%d\n", ftime, frames / time);
+		printf("Frame time: %f, FPS:%f\n", ftime, frames / time);
 	}
 
 
