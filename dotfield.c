@@ -150,9 +150,9 @@ int main (int argc, char *argv[])
 
 		olScale3(0.9, 0.9, 0.9);
 
-		olRotate3X(time * 0.1862);
-		olRotate3Y(time * 0.1244);
-		olRotate3Z(time * 0.1731);
+		olRotate3Z(time / 3);
+		olRotate3Y(time / 10);
+		olRotate3X(time / 15);
 
 		for (i = 0; i < numberOfStars; i++) {
 
